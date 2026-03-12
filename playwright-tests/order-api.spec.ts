@@ -1,13 +1,13 @@
 import {test,expect} from "@playwright/test";
-import {create} from "node:domain";
 
-// test('Create order return Processing', async({request}) =>{
-//     const response = await request.post('http://localhost:3000/orders');
-//     const data = await response.json();
-//
-//     expect(response.status()).toBe(200);
-//     expect(data.status).toBe('PROCESSING');
-// })
+
+test('Create order return Processing', async({request}) =>{
+    const response = await request.post('http://localhost:3000/orders');
+    const data = await response.json();
+
+    expect(response.status()).toBe(200);
+    expect(data.status).toBe('PROCESSING');
+})
 
 test('Repeat until pass', async ({request}) =>{
     const response = await request.post('http://localhost:3000/orders');
