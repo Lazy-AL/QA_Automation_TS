@@ -1,33 +1,19 @@
 import {test,expect} from "@playwright/test";
+import {awaitForOrderReady} from "../helpers/waitForOrderReady.pw";
+import {createOrder} from "../api/ordersClient.pw";
 
 
-test('Create order return Processing', async({request}) =>{
-    const response = await request.post('http://localhost:3000/orders');
-    const data = await response.json();
+test('Should return status 200 and PROCESSING', async({request}) =>{
+    const {response, body} = await createOrder(request)
 
     expect(response.status()).toBe(200);
-    expect(data.status).toBe('PROCESSING');
+    expect(body.status).toBe('PROCESSING');
 })
 
-test('Repeat until pass', async ({request}) =>{
-    const response = await request.post('http://localhost:3000/orders');
-    const order = await response.json();
+test('Should repeat until pass', async ({request}) =>{
+    const order = await createOrder(request)
 
-    const orderId = order.id
-    const start = Date.now();
+    const  result = await awaitForOrderReady(request,order.body.id)
 
-    while(true){
-        const res = await request.get(`http://localhost:3000/orders/${orderId}`)
-        const data = await res.json()
-
-        if (data.status === 'READY'){
-            expect(data.status).toBe('READY')
-            break
-        }
-        if(Date.now() - start > 15000){
-            throw new Error('Order did not become Ready')
-        }
-
-        await new Promise(r => setTimeout(r, 500))
-    }
+    expect(result.status).toBe('READY')
 })
