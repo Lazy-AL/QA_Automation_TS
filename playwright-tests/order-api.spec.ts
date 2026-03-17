@@ -1,6 +1,6 @@
 import {test,expect} from "@playwright/test";
-import {awaitForOrderReady} from "../helpers/waitForOrderReady.pw";
-import {createOrder} from "../api/ordersClient.pw";
+import {awaitForOrderReady} from "../shared/helpers/waitForOrderReady.pw";
+import {createOrder} from "../shared/api/ordersClient.pw";
 
 
 test('Should return status 200 and PROCESSING', async({request}) =>{

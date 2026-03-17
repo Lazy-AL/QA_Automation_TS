@@ -1,5 +1,5 @@
-import {createOrder} from "../../../api/ordersClient.cy";
-import {waitForOrderReady} from "../../../helpers/waitForOrderReady.cy";
+import {createOrder} from "../../../shared/api/ordersClient.cy";
+import {waitForOrderReady} from "../../../shared/helpers/waitForOrderReady.cy";
 
 describe("Orders API", ()=>{
     it('creates orders', () =>{

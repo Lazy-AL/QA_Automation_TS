@@ -6,9 +6,10 @@
     "moduleResolution": "node"
   },
   "include": [
-    "api/**/*.ts",
-    "helpers/**/*.ts",
+    "shared/api/**/*.ts",
+    "shared/helpers/**/*.ts",
     "cypress-tests/**/*.ts",
-    "playwright-tests/**/*.ts"
+    "playwright-tests/**/*.ts",
+    "shared/services/*.ts"
   ]
 }
