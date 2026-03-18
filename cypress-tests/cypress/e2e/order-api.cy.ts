@@ -1,5 +1,6 @@
-import {createOrder} from "../../../shared/api/ordersClient.cy";
+import {createOrder, getOrder} from "../../../shared/api/ordersClient.cy";
 import {waitForOrderReady} from "../../../shared/helpers/waitForOrderReady.cy";
+import {fetchOrder} from "../../../shared/services/orderService";
 
 describe("Orders API", ()=>{
     it('creates orders', () =>{
@@ -9,9 +10,12 @@ describe("Orders API", ()=>{
     })
 
     it('should repeat assertion until return ready', () => {
-        createOrder().then((response)=>{
+        createOrder().then((response) => {
             const orderId = response.body.id
-            waitForOrderReady(orderId)
+
+            fetchOrder((id) => getOrder(id), orderId).then((order) => {
+                expect(order.status).to.eq('READY')
+            })
         })
     });
 })

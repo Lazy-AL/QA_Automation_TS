@@ -1,8 +1,12 @@
-import { getOrder } from '../api/ordersClient.cy'
+export const fetchOrder = (getOrderFn: any, id: number) => {
+    return getOrderFn(id).then((res: any) => {
+        if (res.status !== 200) {
+            throw new Error('Failed to Fetch')
+        }
 
-export const fetchOrder = (id: number) => {
-    return getOrder(id).then((res) => {
-        expect(res.status).to.eq(200)
-        return res.body
+        return {
+            id: res.body.id,
+            status: res.body.status
+        }
     })
 }
