@@ -1,5 +1,4 @@
 import {getOrder} from "../api/ordersClient.cy";
-import {expect} from "@playwright/test";
 
 export function waitForOrderReady(orderId:number){
     function check(){

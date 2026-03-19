@@ -1,5 +1,4 @@
 import {createOrder, getOrder} from "../../../shared/api/ordersClient.cy";
-import {waitForOrderReady} from "../../../shared/helpers/waitForOrderReady.cy";
 import {fetchOrder} from "../../../shared/services/orderService";
 
 describe("Orders API", ()=>{
