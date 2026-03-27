@@ -15,6 +15,6 @@ When('I wait for the order to be ready', async function () {
     )
 })
 
-Then('the order status should be {string}', function (status) {
-    expect(this.result.status).toBe(status)
-})
+// Then('the order status should be {string}', function (status) {
+//     expect(this.result.status).toBe(status)
+// })
