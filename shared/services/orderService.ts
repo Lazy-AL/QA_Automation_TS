@@ -10,3 +10,9 @@ export const fetchOrder = async (getOrderFn: any, id: number) => {
         status: res.body.status
     }
 }
+
+export const createOrderAndWaitReady = async (createOrderFn:any,waitFn:any)=>{
+    const order = await createOrderFn()
+
+    return waitFn(order.body.id)
+}
